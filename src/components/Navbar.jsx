@@ -1,24 +1,30 @@
 import { useState } from 'react'
-import { MdShoppingCart, MdNotifications, MdPerson } from 'react-icons/md'
+import { MdShoppingCart, MdNotifications, MdPerson, MdMenu } from 'react-icons/md'
 
-export default function Navbar() {
+export default function Navbar({ onMenuClick }) {
   const [profileOpen, setProfileOpen] = useState(false)
 
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between sticky top-0 z-10">
+    <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between sticky top-0 z-10">
 
-      {/* Left side: page title */}
-      <h1 className="text-lg font-semibold text-gray-800">File Manager</h1>
+      {/* Left side: hamburger (mobile only) + title */}
+      <div className="flex items-center gap-3">
+        <button
+          onClick={onMenuClick}
+          className="text-gray-500 hover:text-primary text-2xl lg:hidden"
+        >
+          <MdMenu />
+        </button>
+        <h1 className="text-lg font-semibold text-gray-800">File Manager</h1>
+      </div>
 
       {/* Right side: icons */}
       <div className="flex items-center gap-4">
 
-        {/* Cart icon */}
         <button className="text-gray-500 hover:text-primary text-xl">
           <MdShoppingCart />
         </button>
 
-        {/* Notifications icon */}
         <button className="text-gray-500 hover:text-primary text-xl">
           <MdNotifications />
         </button>
@@ -32,7 +38,6 @@ export default function Navbar() {
             U
           </button>
 
-          {/* Dropdown menu — only shows when profileOpen is true */}
           {profileOpen && (
             <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-md z-20">
               <ul className="py-2 text-sm text-gray-700">
